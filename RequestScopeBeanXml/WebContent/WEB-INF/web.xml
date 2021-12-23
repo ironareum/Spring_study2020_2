@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===== 서버와는 별개로 내 프로젝트에 맞게 설정 ===== -->
+<!--서버의 web.xml 에서 가져옴 17번째 줄  -->
+<web-app version="4.0" 
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       
+	http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+
+<!-- 현재 웹 애플리케이션에서 받아들이는 모든 요청에 대해 appServlet이라는 이름으로 정의되어 있는 servlet을 사용하겠다는 설정  -->
+<servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+</servlet-mapping>	
+    
+<!-- 요청 정보를 분석해서 컨트롤러를 선택하는 서블릿을 지정한다  -->
+<servlet>
+	<servlet-name>appServlet</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	
+	<!-- Spring MVC를 설정하는 xml -->
+	<init-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/config/servlet-context.xml</param-value>
+	</init-param>
+	<load-on-startup>1</load-on-startup> <!-- 우선순위  -->
+</servlet>
+
+<!-- bean을 정의할 xml 파일을 지원한다. -->
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>/WEB-INF/config/root-context.xml</param-value>
+</context-param>
+
+<!-- 리스너 설정 : 클라이언트 요청시 servlet-context.xml 와 root-context.xml를 로딩함.  -->
+<listener>
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+<!-- 파라미터 인코딩 필터설정 -->
+<filter>
+	<filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+    	<param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </init-param>
+     <init-param>
+    	<param-name>forceEncoding</param-name>
+        <param-value>true</param-value>
+    </init-param>
+</filter>
+
+<filter-mapping>
+	<filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern> 
+    <!-- /* 모든 요청에 대해 다. 라는 뜻   -->
+</filter-mapping>
+
+
+
+</web-app>	

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 일반 자바가 등록될 곳 : 빈, dao, 매퍼   -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		 http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!--  type 방식으로 선언 --> 
+	<bean class="kr.co.softsoldesk.beans.DataBean1" scope="request" />
+	<!--  name 방식으로 선언 --> 
+	<bean class="kr.co.softsoldesk.beans.DataBean2" scope="request" id="requestBean2"/>
+
+		 
+</beans>

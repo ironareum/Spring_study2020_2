@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 서버  -->
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:beans="http://www.springframework.org/schema/beans"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/mvc
+		 http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+		
+	<!-- 어노테이션을 가지고 있는 controller를 로딩한다. -->
+	<annotation-driven/>
+	
+	<context:component-scan base-package="kr.co.softsoldesk.controller"/>
+	<context:component-scan base-package="kr.co.softsoldesk.beans"/>
+	
+	<!-- Controller메서드(=home())에서 반환하는 문자열 앞(경로), 뒤(확장자)에 붙일 경로  -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/"/> <!-- 앞에붙일 경로  -->
+		<beans:property name="suffix" value=".jsp"/> <!-- 파일명 확장자  -->
+	</beans:bean>
+	
+	<!-- 정적데이터(이미지, 사운드, 동영상, js, css) 경로 설정 --> <!-- ' / ' 는 루트 (=WebContent) -->
+	<resources location="/resources/" mapping="/**"></resources>
+				 
+</beans:beans>
